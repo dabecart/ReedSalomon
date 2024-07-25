@@ -1,7 +1,17 @@
 #!/bin/bash
 
-# This shell file is used to compare up to three BINARY files by first converting them to .hex files
-# so that it can later be easily compared using vimdiff.
+# //////////////////////////////////////////////////////////////////////////////////////////////////
+# @file compare.sh
+# @brief This shell file is used to compare up to three BINARY files by first converting them to 
+# .hex files so that it can later be easily compared using vimdiff.
+# 
+# @version   1.0
+# @date      2024-07-25
+# @author    @dabecart
+#
+# @license
+# This project is licensed under the MIT License - see the LICENSE file for details.
+# //////////////////////////////////////////////////////////////////////////////////////////////////
 
 if [ "$#" -lt 2 ]; then
     echo "This function needs at least two files as arguments!"

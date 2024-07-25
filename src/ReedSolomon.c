@@ -16,13 +16,12 @@
  * BASIC MATH
  **************************************************************************************************/
 
-inline int max(int a, int b){
-    if(a >= b) return a;
-    else return b;
+static inline int max(int a, int b){
+    return (a >= b) ? a : b;
 }
 
 // Calculates the parity of the number of bits of x.
-inline int parity(int x){
+static inline int parity(int x){
     int y = x ^ (x >> 1);
     y     = y ^ (y >> 2);
     y     = y ^ (y >> 4);
@@ -31,7 +30,7 @@ inline int parity(int x){
     return y & 1;
 }
 
-inline int arrayParity(int* x, int len){
+static inline int arrayParity(int* x, int len){
     int par = 0;
     for(int i = 0; i < len; i++){
         par ^= parity(x[i]);
@@ -66,15 +65,15 @@ unsigned short calculateCRC(unsigned char *data, size_t length) {
 const ModInt ZERO = 0;
 const ModInt ONE  = 1;
 
-inline ModInt mod(ModInt x){
+static inline ModInt mod(ModInt x){
     return x%MODULUS;
 }
 
-inline ModInt sumModInt(ModInt x, ModInt y){
+static inline ModInt sumModInt(ModInt x, ModInt y){
     return mod(x+y);
 }
 
-inline ModInt multModInt(ModInt x, ModInt y){
+static inline ModInt multModInt(ModInt x, ModInt y){
     return mod(x*y);
 }
 
@@ -185,7 +184,7 @@ void reducePoly(Polynomial* p){
     }
 }
 
-inline void sumPoly(Polynomial* p, Polynomial* q, Polynomial* pout){
+static inline void sumPoly(Polynomial* p, Polynomial* q, Polynomial* pout){
     Polynomial newP;
     if(p == pout){
         memcpy(&newP, p, sizeof(Polynomial));
@@ -203,7 +202,7 @@ inline void sumPoly(Polynomial* p, Polynomial* q, Polynomial* pout){
 }
 
 // This naive approach is O(n^2).
-inline void multPoly(Polynomial* p, Polynomial* q, Polynomial* pout){
+static inline void multPoly(Polynomial* p, Polynomial* q, Polynomial* pout){
     Polynomial newP;
     if(p == pout){
         memcpy(&newP, p, sizeof(Polynomial));
@@ -228,7 +227,7 @@ inline void multPoly(Polynomial* p, Polynomial* q, Polynomial* pout){
     reducePoly(pout);
 }
 
-inline void multPolyByFrac(Polynomial* p, ModInt a, Polynomial* pout){
+static inline void multPolyByFrac(Polynomial* p, ModInt a, Polynomial* pout){
     Polynomial polyA = {
         .degree = 0,
         .coeffs = {a},
@@ -265,7 +264,7 @@ void printPoly(Polynomial* p){
 /***************************************************************************************************
  * \brief Calculates a function which is zero at all [x] except at [one], where it is [valueAtOne].
  **************************************************************************************************/
-inline void createSingleLagrangeInterp(int one, int* x, int count, int valueAtOne, Polynomial* pout){
+static inline void createSingleLagrangeInterp(int one, int* x, int count, int valueAtOne, Polynomial* pout){
     *pout = POLY_ONE;
     Polynomial zeroP = {
         .degree = 1,

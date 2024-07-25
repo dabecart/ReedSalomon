@@ -22,9 +22,9 @@
 
 // Creates the file that will contain the extra data to correct [filename] in case it gets 
 // corrupted.
-void createRecuperationFile(const char* filename);
+void createRecuperationFile(const char* filename, const char* out);
 
 // Tries to recuperate [inputFilename] with the [recuperationFilename] file. 
-void recuperateFile(const char* inputFilename, const char* recuperationFilename);
+void recuperateFile(const char* inputFilename, const char* recuperationFilename, const char* out);
 
 #endif

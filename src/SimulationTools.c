@@ -170,9 +170,10 @@ AlgorithmReturn createSimulation(int numPoints, int minErrors, int maxErrors){
 
 void testBench(int totalTests, int minErrors, int maxErrors){
     srand(time(0));
-    printf("Number of tests   : %d\n", totalTests);
-    printf("Points per sample : %d\n", RS_MAX_POLY_DEGREE-EXTRA_POINTS);
-    printf("Number of errors  : rand[%d, %d]\n", minErrors, maxErrors);
+    printf("Number of tests         : %d\n", totalTests);
+    printf("Points per sample       : %d\n", NUM_POINTS_SAMPLE);
+    printf("Extra points per sample : %d\n", EXTRA_POINTS);
+    printf("Number of errors        : rand[%d, %d]\n", minErrors, maxErrors);
     printf("#############  TEST BEGIN  ###############\n");
     int fixedOk = 0;
     int noErrorFound = 0;

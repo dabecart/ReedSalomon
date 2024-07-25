@@ -24,7 +24,7 @@ The project has its own [Makefile](/Makefile) to build the project. Simply run:
 $ make
 ```
 
-To run on Linux:
+To run on Linux and display all options (pretty similar on Windows):
 
 ```
 $ ./reed

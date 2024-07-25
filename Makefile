@@ -27,7 +27,7 @@ build/%.o: %.c
 clean:
 	rm -f $(TARGET) $(OBJ)
 	rm -rf build
-	rm -f errorRec.bin fixed.bin corrupted.bin original.bin
+	rm -f *.bin *.out
 
 # PHONY targets to avoid conflicts with files named 'all' or 'clean'
 .PHONY: all clean
