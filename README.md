@@ -1,7 +1,7 @@
-# ReedSalomon
+# ReedSolomon
 *By [@dabecart](https://www.dabecart.net/en/).*
 
-This is my own C implementation of the Reed-Salomon Error Correction Algorithm. 
+This is my own C implementation of the Reed-Solomon Error Correction Algorithm. 
 
 In particular, I've developed this algorithm **to recover the FLASH memory of an critical embedded system if it somehow gets corrupted**. The microcontroller will have a verification step before running its own software. If the verification fails, it will use the reparation data (or *Extra Points* as its called in code) stored on an external EEPROM to repair the damaged data blocks. Once repaired, it will allow the microcontroller to run normally. 
 
@@ -42,7 +42,7 @@ $ make clean
 
 The **encoder** adds a set of extra points to every chunk of data (a chunk is a combination of data blocks). These extra points can be used to *repair* the data if it somehow gets corrupted. The original data and the extra points are stored on separated files (as one will be stored on the FLASH of the micro and the other on the external EEPROM).
 
-These extra points are a combination of points from the Reed-Salomon original approach and one more byte that is a combination of a Hamming code with a small CRC of the data block with those previous extra points. This final byte has two purposes and it's only used when the EEPROM isn't corrupted:
+These extra points are a combination of points from the Reed-Solomon original approach and one more byte that is a combination of a Hamming code with a small CRC of the data block with those previous extra points. This final byte has two purposes and it's only used when the EEPROM isn't corrupted:
 
 1. In the case there's only one byte that's gone bad, the Hamming code will point directly to which one it was.
 2. The CRC is a simple tool to verify that the correction done to the block was OK. In the case it failed, it would *try again* (make a different combination of points to the error correction algorithm) till the CRC matches.
@@ -53,3 +53,4 @@ The **verifier** will receive both files, the original (that could be corrupted)
 
 # The basis of the algorithm
 
+*TODO!*

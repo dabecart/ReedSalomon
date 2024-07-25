@@ -14,7 +14,7 @@
 #define SIMULATION_TOOLS_h
 
 #include "CommonDefines.h"
-#include "ReedSalomon.h"
+#include "ReedSolomon.h"
 #include <time.h>
 
 /***************************************************************************************************

@@ -1,6 +1,6 @@
 /***************************************************************************************************
- * @file ReedSalomon.c
- * @brief The bulk of the Reed Salomon Algorithm.
+ * @file ReedSolomon.c
+ * @brief The bulk of the Reed Solomon Algorithm.
  *
  * @version   1.0
  * @date      2024-07-23
@@ -10,7 +10,7 @@
  * This project is licensed under the MIT License - see the LICENSE file for details.
  **************************************************************************************************/
 
-#include "ReedSalomon.h"
+#include "ReedSolomon.h"
 
 /***************************************************************************************************
  * BASIC MATH

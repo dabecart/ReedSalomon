@@ -1,6 +1,6 @@
 /***************************************************************************************************
  * @file FileTools.h
- * @brief Tools to run the ReedSalomon algorithm on files. 
+ * @brief Tools to run the ReedSolomon algorithm on files. 
  *
  * @version   1.0
  * @date      2024-07-23
@@ -14,7 +14,7 @@
 #define FILE_TOOLS_h
 
 #include "CommonDefines.h"
-#include "ReedSalomon.h"
+#include "ReedSolomon.h"
 
 /***************************************************************************************************
  * FUNCTIONS

@@ -18,5 +18,5 @@
  **************************************************************************************************/
 int main(){
     // Runs 100000 random cases with up to EXTRA_POINTS errors and prints the results of the algo.
-    testBench(10000, 1, EXTRA_POINTS);
+    testBench(100000, 0, EXTRA_POINTS);
 }
