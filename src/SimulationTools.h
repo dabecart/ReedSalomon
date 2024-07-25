@@ -21,9 +21,9 @@
  * FUNCTIONS
  **************************************************************************************************/
 
-// Create a bunch of random tests and specify the maximum number of errors introduced that the 
-// algorithm will try to fix.
-void testBench(int totalTests, int maxErrors);
+// Create a bunch of random tests and specify the minimum and maximum number of errors introduced 
+// that the algorithm will try to fix.
+void testBench(int totalTests, int minErrors, int maxErrors);
 
 // Runs a single case hardcoded in this function.
 int testCase();

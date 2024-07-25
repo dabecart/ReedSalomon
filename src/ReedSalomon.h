@@ -27,9 +27,13 @@ typedef unsigned short ModInt;
  * ALGORITHM SELECTION
  **************************************************************************************************/
 // Different algorithms to calculate the module of a fraction.
+// If MOD_USE_ARRAY is selected, be sure to modify nResults in modFrac(). You can use Wolfram 
+// Mathematica to get the values:
+// In[1] := Table[ModularInverse[x, MODULE], {x, 1, MODULE-1}]
+
 // #define MOD_USE_NAIVE
 // #define MOD_USE_EUCLID
-#define MOD_USE_ARRAY
+#define MOD_USE_ARRAY       
 
 /***************************************************************************************************
  * FUNCTIONS

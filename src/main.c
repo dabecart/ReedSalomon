@@ -17,12 +17,6 @@
  * MAIN
  **************************************************************************************************/
 int main(){
-    testBench(10000, EXTRA_POINTS);
-    
-    // testCase();
-
-    // createRecuperationFile("C:\\Users\\dabc\\repos\\CodingQuestions\\ReedSalomon\\original.bin");
- 
-    // recuperateFile("C:\\Users\\dabc\\repos\\CodingQuestions\\ReedSalomon\\corrupted.bin",
-    //     "C:\\Users\\dabc\\repos\\CodingQuestions\\ReedSalomon\\errorRec.bin");
+    // Runs 100000 random cases with up to EXTRA_POINTS errors and prints the results of the algo.
+    testBench(10000, 1, EXTRA_POINTS);
 }

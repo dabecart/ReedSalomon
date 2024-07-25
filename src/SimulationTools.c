@@ -168,13 +168,14 @@ AlgorithmReturn createSimulation(int numPoints, int minErrors, int maxErrors){
     return runSimulation(x, y, numPoints, errX, errY, numErrors);
 }
 
-void testBench(int totalTests, int maxErrors){
+void testBench(int totalTests, int minErrors, int maxErrors){
     srand(time(0));
-    printf("Number of tests:   %d\n", totalTests);
-    printf("Points per sample: %d\n", RS_MAX_POLY_DEGREE-EXTRA_POINTS);
-    printf("Number of errors:  rand[%d, %d]\n", 1, maxErrors);
+    printf("Number of tests   : %d\n", totalTests);
+    printf("Points per sample : %d\n", RS_MAX_POLY_DEGREE-EXTRA_POINTS);
+    printf("Number of errors  : rand[%d, %d]\n", minErrors, maxErrors);
     printf("#############  TEST BEGIN  ###############\n");
-    int success = 0;
+    int fixedOk = 0;
+    int noErrorFound = 0;
     int errorsExceedMaximum = 0;
     int fixedIncorrectly = 0;
     int fixedIncorrectlyExceedsNumberErrors = 0;
@@ -184,23 +185,29 @@ void testBench(int totalTests, int maxErrors){
     long long minElapsed = 0x7fffffffffffffffLL;
     long long averageElapsed = 0;
 
+    AlgorithmReturn result;
+
     for(int i = 0; i < totalTests; i++){
+        result = UNDEFINED;
+
         if (clock_gettime(CLOCK_REALTIME, &t0) != 0) {
             perror("clock_gettime");
             return;
         }
 
         // Run the simulation.
-        AlgorithmReturn result = createSimulation(RS_MAX_POLY_DEGREE-EXTRA_POINTS, 0, maxErrors);
+        result = createSimulation(RS_MAX_POLY_DEGREE-EXTRA_POINTS, 
+                                                  minErrors, maxErrors);
         
         if (clock_gettime(CLOCK_REALTIME, &t1) != 0) {
             perror("clock_gettime");
             return;
         }
 
-        success += result > 0;
+        fixedOk += (result == FIXED_OK);
+        noErrorFound += (result == WITHOUT_ERRORS);
         fixedIncorrectly += (result == FIXED_INCORRECTLY);
-        errorsExceedMaximum += (result == EXCEEDS_NUMBER_OF_ERRORS || result == FIXED_INCORRECTLY_EXCEEDS_NUMBER_OF_ERRORS);
+        errorsExceedMaximum += (result == EXCEEDS_NUMBER_OF_ERRORS);
         fixedIncorrectlyExceedsNumberErrors += (result == FIXED_INCORRECTLY_EXCEEDS_NUMBER_OF_ERRORS);
 
         long long elapsed = 
@@ -218,9 +225,11 @@ void testBench(int totalTests, int maxErrors){
     }
 
     printf("\n############# TEST RESULTS ###############\n");
-    printf("Success rate: %d/%d. Fixed incorrectly: %d.\n"
-           "Exceeding error limit: %d. Fixed incorrectly: %d.\n", 
-           success, totalTests-errorsExceedMaximum, fixedIncorrectly, errorsExceedMaximum, fixedIncorrectlyExceedsNumberErrors);
+    printf("Success rate: %d/%d. Fixed incorrectly: %d. No errors: %d.\n"
+           "Exceeding error limit: %d. Tried to fix: %d.\n", 
+           fixedOk+noErrorFound, totalTests-errorsExceedMaximum-fixedIncorrectlyExceedsNumberErrors,
+           fixedIncorrectly, noErrorFound, 
+           errorsExceedMaximum, fixedIncorrectlyExceedsNumberErrors);
     double bitRate = NUM_POINTS_SAMPLE*totalTests*1e9/averageElapsed;
     double byteRate = bitRate / 8.0;
     printf("Bitrate: %0.2f bits/sec. Byterate: %0.2f bytes/sec.\n", bitRate, byteRate);

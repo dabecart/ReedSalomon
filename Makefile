@@ -4,9 +4,10 @@ TARGET = reed
 # Compilation flags
 FLAGS = -O2 -flto #-fsanitize=undefined #-pg
 
-# Define the source files and the object files
+# Define the source files, the object files and dependencies
 SRC = $(wildcard src/*.c src/*/*.c)
 OBJ = $(patsubst %.c, build/%.o, $(SRC))
+DEPS = $(patsubst %.c, build/%.d, $(SRC))
 
 # Default rule to build the program
 all: $(TARGET)
@@ -18,7 +19,9 @@ $(TARGET): $(OBJ)
 # Rule to compile the source files into object files
 build/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -MMD -MP -c $< -o $@
+
+-include $(DEPS)
 
 # Rule to clean up files
 clean:
